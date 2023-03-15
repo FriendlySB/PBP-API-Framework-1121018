@@ -8,7 +8,6 @@ import (
 	"strconv"
 
 	"github.com/go-martini/martini"
-	"github.com/gorilla/mux"
 )
 
 func GetAllUsers(w http.ResponseWriter, r *http.Request) {
@@ -92,7 +91,7 @@ func InsertUser(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(response)
 }
 
-func UpdateUser(w http.ResponseWriter, r *http.Request) {
+func UpdateUser(param martini.Params, w http.ResponseWriter, r *http.Request) {
 	db := connect()
 	defer db.Close()
 
@@ -101,8 +100,7 @@ func UpdateUser(w http.ResponseWriter, r *http.Request) {
 		sendErrorResponse(w, "Something went wrong, please try again")
 		return
 	}
-	vars := mux.Vars(r)
-	userId := vars["user_id"]
+	userId := param["user_id"]
 	name := r.Form.Get("name")
 	age, _ := strconv.Atoi(r.Form.Get("age"))
 	address := r.Form.Get("address")
