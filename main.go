@@ -13,14 +13,14 @@ func main() {
 	//2 = user
 	m := martini.Classic()
 
-	//CORS untuk sebuah origin
+	//CORS global
 	m.Use(cors.Allow(&cors.Options{
 		AllowOrigins:     []string{"localhost:8492"},
 		AllowMethods:     []string{"POST", "GET", "PUT", "DELETE"},
 		AllowCredentials: true,
 	}))
 
-	//CORS untuk sebuah access point saja
+	//CORS untuk sebuah route/access point saja
 	allowCORSHandler := cors.Allow(&cors.Options{
 		AllowOrigins:     []string{"localhost:8492"},
 		AllowMethods:     []string{"POST", "GET", "PUT", "DELETE"},
@@ -33,6 +33,7 @@ func main() {
 		r.Put("/:user_id", controller.UpdateUser)
 		r.Delete("/:user_id", controller.DeleteUser)
 	})
+	//CORS
 	m.Delete("/userscors/:user_id", allowCORSHandler, controller.DeleteUser)
 	m.Post("/login", controller.LoginUser)
 	m.Post("/logout", controller.LogoutUser)
