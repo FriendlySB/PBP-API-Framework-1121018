@@ -104,7 +104,8 @@ func UpdateUser(param martini.Params, w http.ResponseWriter, r *http.Request) {
 	name := r.Form.Get("name")
 	age, _ := strconv.Atoi(r.Form.Get("age"))
 	address := r.Form.Get("address")
-	_, errQuery := db.Exec("UPDATE users SET name = ?, age = ?, address = ? WHERE id = ?", name, age, address, userId)
+	email := r.Form.Get("email")
+	_, errQuery := db.Exec("UPDATE users SET name = ?, age = ?, address = ?, email = ? WHERE id = ?", name, age, address, email, userId)
 
 	var response model.UsersResponse
 	if errQuery == nil {
@@ -112,7 +113,7 @@ func UpdateUser(param martini.Params, w http.ResponseWriter, r *http.Request) {
 		response.Status = 200
 		response.Message = "Update Success"
 		id, _ := strconv.Atoi(userId)
-		users = append(users, model.User{ID: id, Name: name, Age: age, Address: address, Email: "", Password: "********"})
+		users = append(users, model.User{ID: id, Name: name, Age: age, Address: address, Email: email, Password: "********"})
 		response.Data = users
 	} else {
 		response.Status = 400
