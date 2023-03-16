@@ -27,17 +27,21 @@ func main() {
 		AllowCredentials: true,
 	})
 
+	//Grouped routers
 	m.Group("/users", func(r martini.Router) {
 		r.Post("", controller.Authenticate(controller.InsertUser, 1))
 		r.Get("", controller.Authenticate(controller.GetAllUsers, 1))
 		r.Put("/:user_id", controller.UpdateUser)
 		r.Delete("/:user_id", controller.DeleteUser)
 	})
-	//CORS
+	//CORS khusus untuk fungsi ini
 	m.Delete("/userscors/:user_id", allowCORSHandler, controller.DeleteUser)
+
+	//Router biasa
 	m.Post("/login", controller.LoginUser)
 	m.Post("/logout", controller.LogoutUser)
 
+	//Ganti port
 	m.RunOnAddr(":8492")
 
 }
