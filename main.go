@@ -9,6 +9,7 @@ import (
 )
 
 func main() {
+	//Test Framework Martini + Golangci
 	//1 = admin
 	//2 = user
 	m := martini.Classic()

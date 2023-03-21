@@ -3,6 +3,7 @@ package controller
 import (
 	"Tugas-Explorasi-1-PBP-Framework-API/model"
 	"encoding/json"
+	"log"
 	"net/http"
 )
 
@@ -11,5 +12,8 @@ func sendErrorResponse(w http.ResponseWriter, message string) {
 	response.Status = 400
 	response.Message = message
 	w.Header().Set("Content=Type", "application/json")
-	json.NewEncoder(w).Encode(response)
+	err := json.NewEncoder(w).Encode(response)
+	if err != nil {
+		log.Println(err)
+	}
 }
