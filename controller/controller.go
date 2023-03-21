@@ -239,3 +239,7 @@ func sendUnauthorizedResponse(w http.ResponseWriter) {
 func HelloWorld() {
 	fmt.Println("Hello World!")
 }
+
+func GoodbyeWorld() {
+	fmt.Println("Goodbye World!")
+}
