@@ -3,6 +3,7 @@ package controller
 import (
 	"Tugas-Explorasi-1-PBP-Framework-API/model"
 	"encoding/json"
+	"fmt"
 	"log"
 	"net/http"
 	"strconv"
@@ -233,4 +234,8 @@ func sendUnauthorizedResponse(w http.ResponseWriter) {
 	if err != nil {
 		log.Println(err)
 	}
+}
+
+func HelloWorld() {
+	fmt.Println("Hello World!")
 }
