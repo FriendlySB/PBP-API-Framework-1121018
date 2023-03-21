@@ -120,7 +120,11 @@ func UpdateUser(param martini.Params, w http.ResponseWriter, r *http.Request) {
 		response.Message = "Update Failed"
 	}
 	w.Header().Set("Content=Type", "application/json")
-	json.NewEncoder(w).Encode(response)
+	err = json.NewEncoder(w).Encode(response)
+	if err != nil {
+		log.Println(err)
+	}
+
 }
 
 func DeleteUser(param martini.Params, w http.ResponseWriter, r *http.Request) {
@@ -193,8 +197,10 @@ func LoginUser(w http.ResponseWriter, r *http.Request) {
 		response.Message = "Login failed!"
 	}
 	w.Header().Set("Content=Type", "application/json")
-	json.NewEncoder(w).Encode(response)
-
+	err = json.NewEncoder(w).Encode(response)
+	if err != nil {
+		log.Println(err)
+	}
 }
 
 func LogoutUser(w http.ResponseWriter, r *http.Request) {
@@ -203,7 +209,10 @@ func LogoutUser(w http.ResponseWriter, r *http.Request) {
 	response.Status = 200
 	response.Message = "Success"
 	w.Header().Set("Content=Type", "application/json")
-	json.NewEncoder(w).Encode(response)
+	err := json.NewEncoder(w).Encode(response)
+	if err != nil {
+		log.Println(err)
+	}
 }
 
 func sendUnauthorizedResponse(w http.ResponseWriter) {
@@ -211,5 +220,8 @@ func sendUnauthorizedResponse(w http.ResponseWriter) {
 	response.Status = 401
 	response.Message = "Unauthorized Access"
 	w.Header().Set("Content=Type", "application/json")
-	json.NewEncoder(w).Encode(response)
+	err := json.NewEncoder(w).Encode(response)
+	if err != nil {
+		log.Println(err)
+	}
 }
