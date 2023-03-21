@@ -45,4 +45,6 @@ func main() {
 	//Ganti port
 	m.RunOnAddr(":8492")
 
+	controller.HelloWorld()
+	controller.GoodbyeWorld()
 }
