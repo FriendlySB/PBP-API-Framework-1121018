@@ -49,7 +49,10 @@ func GetAllUsers(w http.ResponseWriter, r *http.Request) {
 	response.Message = "Success"
 	response.Data = users
 	w.Header().Set("Content=Type", "application/json")
-	json.NewEncoder(w).Encode(response)
+	err = json.NewEncoder(w).Encode(response)
+	if err != nil {
+		log.Println(err)
+	}
 }
 
 func InsertUser(w http.ResponseWriter, r *http.Request) {
@@ -88,7 +91,10 @@ func InsertUser(w http.ResponseWriter, r *http.Request) {
 		response.Message = "Insert Failed"
 	}
 	w.Header().Set("Content=Type", "application/json")
-	json.NewEncoder(w).Encode(response)
+	err = json.NewEncoder(w).Encode(response)
+	if err != nil {
+		log.Println(err)
+	}
 }
 
 func UpdateUser(param martini.Params, w http.ResponseWriter, r *http.Request) {
@@ -148,7 +154,10 @@ func DeleteUser(param martini.Params, w http.ResponseWriter, r *http.Request) {
 		response.Message = "Delete Failed"
 	}
 	w.Header().Set("Content=Type", "application/json")
-	json.NewEncoder(w).Encode(response)
+	err = json.NewEncoder(w).Encode(response)
+	if err != nil {
+		log.Println(err)
+	}
 }
 func LoginUser(w http.ResponseWriter, r *http.Request) {
 	db := connect()
