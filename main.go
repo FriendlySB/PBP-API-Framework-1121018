@@ -9,7 +9,7 @@ import (
 )
 
 func main() {
-	//Test Framework Martini + Golangci
+	//Test Framework Martini dan Github Action Golangci dan Dependency Review
 	//1 = admin
 	//2 = user
 	m := martini.Classic()
